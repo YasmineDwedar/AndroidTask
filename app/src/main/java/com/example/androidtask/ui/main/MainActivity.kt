@@ -1,12 +1,21 @@
 package com.example.androidtask.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import com.example.androidtask.R
+import com.example.androidtask.base.BaseActivity
+import com.example.androidtask.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MainActivity : BaseActivity<ActivityMainBinding,MainActivityViewModel>(R.layout.activity_main) {
+
+    override fun setObservers() {
+
     }
+
+    override fun setListeners() {
+
+    }
+
+    override fun initializeViewModel() {
+
+    }
+
 }
