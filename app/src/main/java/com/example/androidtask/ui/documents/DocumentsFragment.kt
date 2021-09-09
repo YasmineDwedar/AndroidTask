@@ -16,6 +16,7 @@ class DocumentsFragment : BaseFragment<FragmentDocumentsBinding, DocumentsFragme
     }
 
     override fun initializeViewModel() {
+        initializeViewModel(DocumentsFragmentViewModel::class.java)
     }
 
 }
