@@ -54,11 +54,9 @@ abstract class AppModule {
         @Provides
         fun provideHttpClient(
             httpLoggingInterceptor: HttpLoggingInterceptor,
-//            authenticationInterceptor: AuthenticationInterceptor
         ): OkHttpClient =
             OkHttpClient.Builder()
                 .addInterceptor(httpLoggingInterceptor)
-//                .addInterceptor(authenticationInterceptor)
                 .callTimeout(100, TimeUnit.SECONDS)
                 .readTimeout(100, TimeUnit.SECONDS)
                 .writeTimeout(100, TimeUnit.SECONDS)
