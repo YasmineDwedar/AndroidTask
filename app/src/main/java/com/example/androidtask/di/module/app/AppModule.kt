@@ -1,8 +1,7 @@
-package com.example.androidtask.di.module
+package com.example.androidtask.di.module.app
 
 import android.app.Application
 import android.content.Context
-import android.content.SharedPreferences
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.engine.DiskCacheStrategy
