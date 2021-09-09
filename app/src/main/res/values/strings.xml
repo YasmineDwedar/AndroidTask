@@ -2,4 +2,6 @@
     <string name="app_name">AndroidTask</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello Des fragment</string>
+    <string name="search_for_your_favorite_book">Search for your favorite Book</string>
+
 </resources>
