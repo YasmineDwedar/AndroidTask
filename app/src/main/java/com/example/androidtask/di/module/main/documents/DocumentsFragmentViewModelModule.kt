@@ -2,8 +2,7 @@ package com.example.androidtask.di.module.main.documents
 
 import androidx.lifecycle.ViewModel
 import com.example.androidtask.di.viewmodel.ViewModelKey
-import com.example.androidtask.ui.documents.DocumentsFragment
-import com.example.androidtask.ui.documents.DocumentsFragmentViewModel
+import com.example.androidtask.ui.documents.presentation.DocumentsFragmentViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

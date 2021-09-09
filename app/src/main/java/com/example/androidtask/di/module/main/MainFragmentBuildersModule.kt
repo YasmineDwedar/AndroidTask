@@ -3,7 +3,7 @@ package com.example.androidtask.di.module.main
 import com.example.androidtask.di.module.main.documents.DocumentsFragmentModule
 import com.example.androidtask.di.module.main.documents.DocumentsFragmentViewModelModule
 import com.example.androidtask.di.scopes.DocumentsScope
-import com.example.androidtask.ui.documents.DocumentsFragment
+import com.example.androidtask.ui.documents.presentation.DocumentsFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
