@@ -15,7 +15,6 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="28dp"
-            android:layout_marginBottom="16dp"
             android:background="@drawable/rect_rounded_button"
             android:backgroundTint="@color/search_bg_color"
             android:drawableStart="@drawable/search_icon"
@@ -28,7 +27,6 @@
             android:padding="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/documents_RV"
             android:textSize="@dimen/txt_size_14sp"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -39,12 +37,33 @@
             android:background="@color/white"
             android:clipToPadding="false"
             android:orientation="vertical"
+            android:visibility="visible"
             android:paddingHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            tools:listitem="@layout/document_item"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_et"
             app:layout_constraintVertical_bias="1.0" />
+        <TextView
+            android:id="@+id/no_results_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/no_results_found"
+            android:ellipsize="end"
+            android:elevation="1dp"
+            android:fontFamily="@font/regular"
+            android:gravity="center"
+            android:maxLines="5"
+            android:visibility="gone"
+            android:padding="8dp"
+            android:textColor="@color/textcolor"
+            android:textSize="@dimen/txt_size_18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
