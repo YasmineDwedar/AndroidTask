@@ -3,5 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello Des fragment</string>
     <string name="search_for_your_favorite_book">Search for your favorite Book</string>
+    <string name="title">Title: %s</string>
+    <string name="author">Author: %s</string>
 
 </resources>
