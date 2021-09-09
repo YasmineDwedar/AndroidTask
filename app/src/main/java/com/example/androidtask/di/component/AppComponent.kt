@@ -2,7 +2,7 @@ package com.example.androidtask.di.component
 
 import android.app.Application
 import com.example.androidtask.application.BaseApplication
-import com.example.androidtask.di.module.AppModule
+import com.example.androidtask.di.module.app.AppModule
 import com.example.androidtask.di.module.acitivitybuilder.ActivityBuilderModule
 import com.example.androidtask.di.viewmodel.ViewModelFactoryModule
 import dagger.BindsInstance
