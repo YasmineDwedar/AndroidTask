@@ -1,6 +1,6 @@
 package com.example.androidtask.application
 
-import com.example.androidtask.di.component.DaggerAppComponent
+import com.example.androidtask.commons.di.component.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 
