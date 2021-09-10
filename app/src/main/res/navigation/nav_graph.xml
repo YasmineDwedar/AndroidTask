@@ -10,4 +10,8 @@
         android:name="com.example.androidtask.modules.documents.presentation.DocumentsFragment"
         android:label="fragment_documents"
         tools:layout="@layout/fragment_documents" />
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.androidtask.modules.details.presentation.DetailsFragment"
+        android:label="DetailsFragment" />
 </navigation>
