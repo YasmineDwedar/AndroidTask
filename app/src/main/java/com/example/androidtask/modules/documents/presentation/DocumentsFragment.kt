@@ -22,6 +22,8 @@ class DocumentsFragment : BaseFragment<FragmentDocumentsBinding, DocumentsFragme
 
     @Inject
     lateinit var documentsAdapter: DocumentsAdapter
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requireActivity().makeStatusBarTransparent()
@@ -40,11 +42,11 @@ class DocumentsFragment : BaseFragment<FragmentDocumentsBinding, DocumentsFragme
                 }
                 false
             })
-            lifecycleScope.launchWhenResumed {
+           /* lifecycleScope.launchWhenResumed {
                 searchEt.onTextChangedWithDebounce().debounce(600L).collect {
                     performSearch(it)
                 }
-            }
+            }*/
         }
     }
 
@@ -69,6 +71,10 @@ class DocumentsFragment : BaseFragment<FragmentDocumentsBinding, DocumentsFragme
 
     override fun initializeViewModel() {
         initializeViewModel(DocumentsFragmentViewModel::class.java)
+        binding?.also {
+            it.vm = viewModel
+            it.lifecycleOwner = viewLifecycleOwner
+        }
     }
     private fun setUpRecyclerView() {
         binding?.documentsRV?.adapter = documentsAdapter
@@ -80,18 +86,5 @@ class DocumentsFragment : BaseFragment<FragmentDocumentsBinding, DocumentsFragme
         documentsAdapter.notifyDataSetChanged()
     }
 
-    private fun performSearch(search: String) {
-        //viewModel.wordToSearch=search
-        lifecycleScope.launch {
-            if (search.trim().isNotBlank()) {
-                viewModel.getDocumentsSearchResults(search=search,page = 1)
-            } else {
-                binding?.apply {
-                    noResultsTv.show()
-                    documentsRV.hide()
-                }
-            }
-        }
-    }
 
 }
