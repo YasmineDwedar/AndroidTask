@@ -79,6 +79,7 @@ class DocumentsAdapter @Inject constructor(private val  documentsMainCallBack: D
         fun bind(item: DocumentPresentationModel?) {
             binding.apply {
                 item?.let {
+                    root.setOnClickListener { documentsMainCallBack.onItemClicked(item) }
                     titleTv.text = root.resources.getString(R.string.title,it.title)
                     authorTv.text = root.resources.getString(R.string.author,it.author)
                     view.makeGoneIf(bindingAdapterPosition == currentList.size - 1)

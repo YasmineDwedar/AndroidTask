@@ -7,10 +7,13 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView.OnEditorActionListener
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidtask.R
+import com.example.androidtask.commons.data.Constants.ITEM_DETAIL_BUNDLE_KEY
 import com.example.androidtask.commons.presentation.BaseFragment
 import com.example.androidtask.databinding.FragmentDocumentsBinding
 import com.example.androidtask.modules.documents.presentation.model.BaseDocumentsModel
@@ -149,7 +152,15 @@ class DocumentsFragment : BaseFragment<FragmentDocumentsBinding, DocumentsFragme
 
 
     override fun onItemClicked(item: DocumentPresentationModel) {
-
+        val bundle = Bundle().apply {
+            putParcelable(ITEM_DETAIL_BUNDLE_KEY, item)
+        }
+        val navController = Navigation.findNavController(requireActivity(), R.id.container)
+        navController.navigate(
+            R.id.detailsFragment,
+            bundle,
+            NavOptions.Builder().setLaunchSingleTop(true).build()
+        )
     }
 
 
