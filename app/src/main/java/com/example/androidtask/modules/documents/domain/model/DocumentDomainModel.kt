@@ -6,4 +6,5 @@ package com.example.androidtask.modules.documents.domain.model
 class DocumentDomainModel(
     val title: String="",
     val author: String="",
+    val isbnList: List<String>?= emptyList()
 )

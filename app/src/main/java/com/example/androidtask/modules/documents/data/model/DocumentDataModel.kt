@@ -10,4 +10,6 @@ data class DocumentDataModel(
     val title: String?,
     @Json(name = "author_name")
     val authorName: List<String>?,
+    @Json(name = "isbn")
+    val isbnList: List<String>?
 )

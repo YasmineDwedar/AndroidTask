@@ -20,7 +20,7 @@ import javax.inject.Inject
  * Created by Yasmine on September,2021
  */
 @DocumentsScope
-class DocumentsAdapter @Inject constructor() :
+class DocumentsAdapter @Inject constructor(private val  documentsMainCallBack: DocumentsMainCallBack) :
     ListAdapter<BaseDocumentsModel, RecyclerView.ViewHolder>(DocumentsDiffUtil()) {
 
     class DocumentsDiffUtil : DiffUtil.ItemCallback<BaseDocumentsModel>() {
@@ -89,4 +89,8 @@ class DocumentsAdapter @Inject constructor() :
 
     inner class DocumentsShimmerViewHolder(binding: DocumentItemShimmerBinding) :
         BaseShimmerViewHolder(binding)
+
+    interface DocumentsMainCallBack {
+        fun onItemClicked(item: DocumentPresentationModel)
+    }
 }

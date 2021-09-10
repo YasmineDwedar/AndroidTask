@@ -10,5 +10,6 @@ fun DocumentDomainModel.toPresentationModel(): DocumentPresentationModel {
     return DocumentPresentationModel(
         title = this.title ,
         author = this.author,
+        isbnList=this.isbnList
     )
 }

@@ -12,5 +12,6 @@ fun DocumentDataModel.toDomainModel(): DocumentDomainModel {
     return DocumentDomainModel(
             title = this.title ?: "",
             author = this.authorName?.getOrNull(0) ?: "Not Determined" ,
+        isbnList=this.isbnList
     )
 }
