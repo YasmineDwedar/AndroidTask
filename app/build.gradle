@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.androidtask"
-        minSdkVersion 24
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -110,6 +110,8 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.7.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
 
+    //Animated ProgressBar
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
     //LoggingInterceptor
     implementation 'com.jakewharton.timber:timber:4.7.1'
