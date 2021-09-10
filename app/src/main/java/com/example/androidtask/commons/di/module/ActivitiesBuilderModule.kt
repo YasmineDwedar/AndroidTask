@@ -4,6 +4,7 @@ import com.example.androidtask.modules.main.di.MainActivityModule
 import com.example.androidtask.modules.documents.di.DocumentsFragmentProviderModule
 import com.example.androidtask.modules.main.di.MainViewModelModule
 import com.example.androidtask.commons.di.scopes.MainScope
+import com.example.androidtask.modules.details.di.DetailsFragmentProviderModule
 import com.example.androidtask.modules.main.presentation.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -17,6 +18,7 @@ abstract class ActivitiesBuilderModule {
     @ContributesAndroidInjector(modules = [
         MainViewModelModule::class,
         DocumentsFragmentProviderModule::class,
+        DetailsFragmentProviderModule::class,
         MainActivityModule::class
     ])
     abstract fun contributesInjectMainActivity(): MainActivity
