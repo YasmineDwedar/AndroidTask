@@ -12,6 +12,15 @@ interface DocumentsAPI {
     @GET(SEARCH)
     suspend fun getDocumentsSearchResults(
             @Query("q") searchText:String?,
-            @Query("page") page:Int=1
-    ): DocumentResponse
+            @Query("page") page:Int=1): DocumentResponse
+
+
+    @GET(SEARCH)
+    suspend fun getDocumentsFromTitle(@Query("title") title:String?):DocumentResponse
+
+
+    @GET(SEARCH)
+    suspend fun getDocumentsFromAuthor(@Query("author") author:String?):DocumentResponse
+
+
 }
