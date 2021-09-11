@@ -37,6 +37,53 @@
             android:textSize="@dimen/txt_size_14sp"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/search_et"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+        <RadioButton
+            android:id="@+id/title_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:checked="false"
+            android:buttonTint="@color/textcolor"
+            android:text="@string/title_label"
+            android:textColor="@color/green"
+            android:textSize="@dimen/txt_size_16sp"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/author_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:checked="false"
+            android:text="@string/author_label"
+            android:textColor="@color/green"
+            android:buttonTint="@color/textcolor"
+            android:textSize="@dimen/txt_size_16sp"
+            android:textStyle="bold" />
+            <RadioButton
+                android:id="@+id/all_radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:checked="true"
+                android:text="@string/all"
+                android:textColor="@color/green"
+                android:buttonTint="@color/textcolor"
+                android:textSize="@dimen/txt_size_16sp"
+                android:textStyle="bold" />
+        </RadioGroup>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/documents_RV"
             android:layout_width="match_parent"
@@ -52,7 +99,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_et"
+            app:layout_constraintTop_toBottomOf="@id/radio_group"
             app:layout_constraintVertical_bias="1.0" />
         <TextView
             android:id="@+id/no_results_tv"
