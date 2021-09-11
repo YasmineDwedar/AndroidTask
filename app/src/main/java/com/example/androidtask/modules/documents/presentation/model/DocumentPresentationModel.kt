@@ -1,6 +1,7 @@
 package com.example.androidtask.modules.documents.presentation.model
 
 import android.os.Parcelable
+import com.example.androidtask.modules.details.presentation.model.BaseDetailsModel
 import kotlinx.android.parcel.Parcelize
 
 /**
