@@ -1,4 +1,4 @@
-package com.example.androidtask.modules.details.di
+package com.example.androidtask.commons.di.scopes
 
 import javax.inject.Scope
 
