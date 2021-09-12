@@ -10,5 +10,7 @@
     <string name="author">Author: %s</string>
     <string name="no_results_found">No Results Found.</string>
     <string name="all">All</string>
+    <string name="retry">retry</string>
+    <string name="no_internet_connection">No internet connection</string>
 
 </resources>
