@@ -57,9 +57,9 @@ abstract class AppModule {
         ): OkHttpClient =
             OkHttpClient.Builder()
                 .addInterceptor(httpLoggingInterceptor)
-                .callTimeout(20, TimeUnit.SECONDS)
-                .readTimeout(20, TimeUnit.SECONDS)
-                .writeTimeout(20, TimeUnit.SECONDS)
+                .callTimeout(120, TimeUnit.SECONDS)
+                .readTimeout(120, TimeUnit.SECONDS)
+                .writeTimeout(120, TimeUnit.SECONDS)
                 .build()
 
         @Singleton
