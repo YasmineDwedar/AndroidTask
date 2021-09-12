@@ -2,6 +2,7 @@ package com.example.androidtask.commons.presentation
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -32,6 +33,7 @@ abstract class BaseActivity<VDB : ViewDataBinding, VM : ViewModel>(private val l
 
     fun handleErrors(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+        Log.d("handleErrors", "handleErrors:$msg ")
     }
 
     fun initializeViewModel(modelClass: Class<out VM>) {
