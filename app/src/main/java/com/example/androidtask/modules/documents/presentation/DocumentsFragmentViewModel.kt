@@ -16,6 +16,8 @@ import com.example.androidtask.modules.documents.domain.usecase.SearchDocumentsU
 import com.example.androidtask.modules.documents.presentation.model.BaseDocumentsModel
 import com.example.androidtask.modules.documents.presentation.model.DocumentPresentationModel
 import com.example.androidtask.modules.documents.presentation.model.DocumentsShimmerModel
+import com.example.androidtask.modules.documents.presentation.model.SelectedTextMode
+import com.example.androidtask.modules.documents.presentation.model.SelectedTextMode.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
@@ -42,12 +44,13 @@ class DocumentsFragmentViewModel @Inject constructor(
         get() = _hasNextStateFlow
 
     val search = MutableLiveData("")
+   // var normalSearchMode=true
     var searchString: String = ""
     var hasNext = true
     var pageNumber = 1
     var responsee = ArrayList<DocumentPresentationModel>()
     private val controlCall = ControlledRunner<Unit>()
-
+    var mode = ALL
 
     init {
         launchSafeCoroutine {
@@ -60,28 +63,47 @@ class DocumentsFragmentViewModel @Inject constructor(
     fun getDocumentsSearchResults() {
         launchSafeCoroutine {
             controlCall.cancelPreviousThenRun {
-                if (hasNext) {
-                    if (pageNumber == 1) _documentsStateFlow.emit(getShimmerList())
-                    val result = searchDocumentsUseCases.execute(searchString, pageNumber)
-                        .map { it.toPresentationModel() }
-                    if (responsee.isEmpty()) {  //First network call
-                        responsee.addAll(result)
-                        pageNumber++
-                        _documentsStateFlow.emit(result)
-                    } else {                  // SecondOrMore network call
-                        if (result.size == ITEMS_PER_PAGE) {
+                if (searchString.isNotBlank()) {
+                    if (hasNext) {
+                        if (pageNumber == 1) _documentsStateFlow.emit(getShimmerList())
+                        val result = when (mode) {
+                            TITLE -> {
+                                searchByTitleUseCase.execute(searchString, pageNumber)
+                                    .map { it.toPresentationModel() }
+                            }
+                            AUTHOR -> {
+                                searchByAuthorUseCase.execute(searchString, pageNumber)
+                                    .map { it.toPresentationModel() }
+                            }
+                            ALL -> {
+                                searchDocumentsUseCases.execute(searchString, pageNumber)
+                                    .map { it.toPresentationModel() }
+                            }
+                        }
+
+                        if (responsee.isEmpty()) {  //First network call
+                            responsee.addAll(result)
                             pageNumber++
-                            val oldProducts = responsee
-                            oldProducts.addAll(result)
-                            _documentsStateFlow.emit(oldProducts.toList())
-                        } else if (result.size < ITEMS_PER_PAGE) {
-                            val oldProducts = responsee
-                            oldProducts.addAll(result)
-                            _documentsStateFlow.emit(oldProducts)
-                            hasNext = false
-                            _hasNextStateFlow.emit(false)
+                            Log.d("httpTestList", "if (responsee.isEmpty()): ${responsee.size}")
+                            _documentsStateFlow.emit(result)
+                        } else {                  // SecondOrMore network call
+                            if (result.size == ITEMS_PER_PAGE) {
+                                pageNumber++
+                                val oldProducts = responsee
+                                oldProducts.addAll(result)
+                                _documentsStateFlow.emit(oldProducts.toList())
+                            } else if (result.size < ITEMS_PER_PAGE) {
+                                val oldProducts = responsee
+                                oldProducts.addAll(result)
+                                _documentsStateFlow.emit(oldProducts)
+                                hasNext = false
+                                _hasNextStateFlow.emit(false)
+                            }
                         }
                     }
+                }
+                else{
+                    _documentsStateFlow.emit(emptyList())
                 }
             }
         }
@@ -108,7 +130,7 @@ class DocumentsFragmentViewModel @Inject constructor(
         }
     }
 
-    private fun initializePagination() {
+     fun initializePagination() {
         launchSafeCoroutine {
             responsee.clear()
             pageNumber = 1
@@ -117,19 +139,23 @@ class DocumentsFragmentViewModel @Inject constructor(
         }
     }
 
-     fun getSearchResultsFromTitle(title: String) {
-        launchSafeCoroutine {
-           val results= searchByTitleUseCase.execute(title).map { it.toPresentationModel() }
-            _documentsStateFlow.emit(results)
-        }
-    }
-
-     fun getSearchResultsFromAuthor(author: String) {
-        launchSafeCoroutine {
-          val results= searchByAuthorUseCase.execute(author).map { it.toPresentationModel() }
-            _documentsStateFlow.emit(results)
-        }
-    }
+//     fun getSearchResultsFromTitle(title: String) {
+//        launchSafeCoroutine {
+//            controlCall.cancelPreviousThenRun {
+//                _documentsStateFlow.emit(getShimmerList())
+//                _documentsStateFlow.emit(results)
+//            }
+//        }
+//    }
+//
+//     fun getSearchResultsFromAuthor(author: String) {
+//        launchSafeCoroutine {
+//            controlCall.cancelPreviousThenRun {
+//                _documentsStateFlow.emit(getShimmerList())
+//                _documentsStateFlow.emit(results)
+//            }
+//        }
+//    }
 }
 
 

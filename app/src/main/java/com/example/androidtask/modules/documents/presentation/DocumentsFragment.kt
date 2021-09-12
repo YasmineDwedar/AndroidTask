@@ -16,12 +16,12 @@ import com.example.androidtask.commons.data.Constants.ITEM_DETAIL_BUNDLE_KEY
 import com.example.androidtask.commons.data.Constants.SELECTED_TEXT
 import com.example.androidtask.commons.data.Constants.SELECTED_TEXT_MODE
 import com.example.androidtask.commons.presentation.BaseFragment
+import com.example.androidtask.commons.presentation.extensions.*
 import com.example.androidtask.databinding.FragmentDocumentsBinding
 import com.example.androidtask.modules.documents.presentation.model.BaseDocumentsModel
-import com.example.androidtask.modules.documents.presentation.recyclerview.DocumentsAdapter
-import com.example.androidtask.commons.presentation.extensions.*
-import com.example.androidtask.modules.details.presentation.model.SelectedTextMode
 import com.example.androidtask.modules.documents.presentation.model.DocumentPresentationModel
+import com.example.androidtask.modules.documents.presentation.model.SelectedTextMode
+import com.example.androidtask.modules.documents.presentation.recyclerview.DocumentsAdapter
 import com.github.ybq.android.spinkit.sprite.Sprite
 import com.github.ybq.android.spinkit.style.Circle
 import kotlinx.coroutines.flow.collect
@@ -34,9 +34,8 @@ class DocumentsFragment :
 
     @Inject
     lateinit var documentsAdapter: DocumentsAdapter
-    var isLoading = false
+    private var isLoading = false
     var isScrolling = false
-    var selectedText: String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,41 +51,50 @@ class DocumentsFragment :
 
     override fun setListeners() {
         binding?.apply {
-            searchEt.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+            searchEt.setOnEditorActionListener(OnEditorActionListener { v, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     v.hideKeyboard()
                     return@OnEditorActionListener true
                 }
                 false
             })
-
-            titleRadioButton.setOnCheckedChangeListener { _, _ ->
-                viewModel.getSearchResultsFromTitle(searchEt.text.toString())
-
+            retryBtn.setOnClickListener {
+                viewModel.initializePagination()
             }
-            authorRadioButton.setOnCheckedChangeListener { _, _ ->
-                viewModel.getSearchResultsFromAuthor(searchEt.text.toString())
-
+            radioGroup.setOnCheckedChangeListener { _, checkedId ->
+                if (checkedId != -1) {
+                    viewModel.mode = getMode(checkedId)
+                    viewModel.initializePagination()
+                }
             }
-            allRadioButton.setOnCheckedChangeListener { _, _ ->
-                viewModel.getDocumentsSearchResults()
 
-            }
         }
 
     }
 
     override fun setObservers() {
+        viewModel.networkState.observe(this) {
+            handleError(it)
+            binding?.apply {
+                noResultsTv.show()
+                noResultsTv.text = getString(R.string.no_internet_connection)
+                retryBtn.show()
+                documentsRV.hide()
+            }
+        }
         lifecycleScope.launchWhenStarted {
             binding?.apply {
                 viewModel.documentsStateFlow.collect {
                     if (it.isNotEmpty()) {
                         noResultsTv.hide()
+                        retryBtn.hide()
                         documentsRV.show()
                         submitToAdapter(it)
                         hideCircularProgressBar()
                     } else {
                         noResultsTv.show()
+                        noResultsTv.text = getString(R.string.no_results_found)
+                        retryBtn.hide()
                         documentsRV.hide()
                     }
                 }
@@ -103,29 +111,22 @@ class DocumentsFragment :
         }
         this.getNavigationResultLiveData<String>(SELECTED_TEXT)
             ?.observe(viewLifecycleOwner) { result ->
-                Log.d("TAG", "SELECTED: $result")
                 binding?.apply {
-                    selectedText = result
                     searchEt.setText(result)
                 }
             }
         this.getNavigationResultLiveData<SelectedTextMode>(SELECTED_TEXT_MODE)
             ?.observe(viewLifecycleOwner) { result ->
-                Log.d("TAG", "SELECTED: $result")
                 binding?.apply {
                     when (result) {
                         SelectedTextMode.TITLE -> {
                             titleRadioButton.isChecked = true
-                            selectedText?.let { title ->
-                                viewModel.getSearchResultsFromTitle(title)
-                            }
+
                         }
                         SelectedTextMode.AUTHOR -> {
                             authorRadioButton.isChecked = true
-                            selectedText?.let { author ->
-                                viewModel.getSearchResultsFromAuthor(author)
-                            }
                         }
+                        else -> {}
                     }
                 }
             }
@@ -165,7 +166,7 @@ class DocumentsFragment :
         viewModel.getDocumentsSearchResults()
     }
 
-    val scrollListner = object : RecyclerView.OnScrollListener() {
+    private val scrollListner = object : RecyclerView.OnScrollListener() {
 
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
@@ -176,10 +177,6 @@ class DocumentsFragment :
                     if (visibleItemCount == layoutManager.itemCount && viewModel.hasNext) {
                         onScrollPage()
                         showCircularProgressBar()
-                        Log.d(
-                            "TAG",
-                            "onScrolled: ${visibleItemCount} lastVisibleItemPosition:${layoutManager.itemCount}"
-                        )
                         isScrolling = false
                     }
 
@@ -201,4 +198,14 @@ class DocumentsFragment :
             NavOptions.Builder().setLaunchSingleTop(true).build()
         )
     }
+
+    private fun getMode(id: Int): SelectedTextMode {
+        return when(id) {
+            R.id.title_radio_button -> SelectedTextMode.TITLE
+            R.id.author_radio_button -> SelectedTextMode.AUTHOR
+            else -> SelectedTextMode.ALL
+        }
+
+    }
 }
+
