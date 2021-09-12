@@ -13,10 +13,10 @@ import java.net.UnknownHostException
 object ExceptionHandler {
     fun parseException(exception:Throwable, networkState: MutableLiveData<String>){
         when(exception){
-            is IOException -> networkState.postValue("Something went wrong ")
+            is IOException -> networkState.postValue("Please Check Your internet connection")
             is NetworkErrorException -> networkState.postValue("Network Error..")
             is java.lang.Exception -> networkState.postValue("An error occurred!")
-            is UnknownHostException -> networkState.postValue("Please Check You internet connection")
+            is UnknownHostException -> networkState.postValue("Please Check Your internet connection")
             is SocketTimeoutException ->networkState.postValue("Something went wrong")
             is ConnectException ->networkState.postValue("Something went wrong")
             else ->  networkState.postValue("Something went wrong")
