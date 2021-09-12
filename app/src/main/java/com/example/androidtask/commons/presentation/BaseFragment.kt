@@ -45,10 +45,14 @@ abstract class BaseFragment<VDB: ViewDataBinding,VM: ViewModel>(val layoutID:Int
         (activity as BaseActivity<*, *>).openActivity(activityClass)
     }
 
+    fun handleError(msg: String) {
+        (activity as BaseActivity<*,*>).handleErrors(msg)
+    }
+
     fun initializeViewModel(modelClass:Class<out VM>){
         viewModel= ViewModelProvider(this,viewModelFactory).get(modelClass)
     }
-    abstract fun setListeners()
-    abstract fun setObservers()
+    open fun setListeners(){}
+    open fun setObservers(){}
     abstract fun initializeViewModel()
 }
