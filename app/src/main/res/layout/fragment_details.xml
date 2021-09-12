@@ -16,9 +16,7 @@
             android:layout_marginTop="20dp"
             android:clipToPadding="false"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/author_tv"
             android:paddingBottom="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             />
     </FrameLayout>
