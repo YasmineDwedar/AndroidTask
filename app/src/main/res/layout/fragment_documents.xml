@@ -45,7 +45,18 @@
             app:layout_constraintTop_toBottomOf="@id/search_et"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
-
+            <RadioButton
+                android:id="@+id/all_radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:checked="true"
+                android:text="@string/all"
+                android:textColor="@color/green"
+                android:buttonTint="@color/textcolor"
+                android:textSize="@dimen/txt_size_16sp"
+                android:textStyle="bold" />
         <RadioButton
             android:id="@+id/title_radio_button"
             android:layout_width="wrap_content"
@@ -71,18 +82,7 @@
             android:buttonTint="@color/textcolor"
             android:textSize="@dimen/txt_size_16sp"
             android:textStyle="bold" />
-            <RadioButton
-                android:id="@+id/all_radio_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:checked="true"
-                android:text="@string/all"
-                android:textColor="@color/green"
-                android:buttonTint="@color/textcolor"
-                android:textSize="@dimen/txt_size_16sp"
-                android:textStyle="bold" />
+
         </RadioGroup>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/documents_RV"
@@ -113,22 +113,38 @@
             android:maxLines="5"
             android:visibility="gone"
             android:padding="8dp"
+            app:layout_constraintVertical_chainStyle="packed"
             android:textColor="@color/textcolor"
             android:textSize="@dimen/txt_size_18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/retry_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/retry_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/retry"
+            android:layout_marginTop="20dp"
+            android:textAllCaps="false"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/no_results_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
         <com.github.ybq.android.spinkit.SpinKitView
             android:id="@+id/progressBar"
             style="@style/SpinKitView.Large.Circle"
             android:layout_width="20dp"
             android:layout_height="34dp"
             android:layout_gravity="center"
-            android:visibility="visible"
+            android:layout_marginEnd="16dp"
+            android:visibility="gone"
             app:SpinKit_Color="@color/red"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@id/search_et"
+            app:layout_constraintTop_toTopOf="@id/search_et"
+            app:layout_constraintEnd_toEndOf="@id/search_et" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
