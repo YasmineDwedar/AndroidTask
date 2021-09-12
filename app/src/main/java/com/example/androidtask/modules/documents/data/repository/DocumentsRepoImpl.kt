@@ -20,15 +20,15 @@ class DocumentsRepoImpl @Inject constructor(private val documentsAPI: DocumentsA
         return listOfItems
         }
 
-    override suspend fun getDocumentsFromTitle(title: String): List<DocumentDomainModel> {
-        val listOfItems = documentsAPI.getDocumentsFromTitle(title).docs?.map {
+    override suspend fun getDocumentsFromTitle(title: String, page: Int): List<DocumentDomainModel> {
+        val listOfItems = documentsAPI.getDocumentsFromTitle(title,page).docs?.map {
             it.toDomainModel()
         } ?: emptyList()
         return listOfItems
     }
 
-    override suspend fun getDocumentsFromAuthor(author: String): List<DocumentDomainModel> {
-        val listOfItems = documentsAPI.getDocumentsFromAuthor(author).docs?.map {
+    override suspend fun getDocumentsFromAuthor(author: String, page: Int): List<DocumentDomainModel> {
+        val listOfItems = documentsAPI.getDocumentsFromAuthor(author,page).docs?.map {
             it.toDomainModel()
         } ?: emptyList()
         return listOfItems

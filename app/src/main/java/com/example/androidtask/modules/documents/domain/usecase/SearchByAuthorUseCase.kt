@@ -10,7 +10,7 @@ import javax.inject.Inject
  */
 @DocumentsScope
 class SearchByAuthorUseCase @Inject constructor(private val documentsRepo: DocumentsRepo) {
-    suspend fun execute(author: String): List<DocumentDomainModel>{
-        return documentsRepo.getDocumentsFromAuthor(author)
+    suspend fun execute(author: String,page: Int): List<DocumentDomainModel>{
+        return documentsRepo.getDocumentsFromAuthor(author,page)
     }
 }

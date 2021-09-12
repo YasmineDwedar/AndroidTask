@@ -16,11 +16,13 @@ interface DocumentsAPI {
 
 
     @GET(SEARCH)
-    suspend fun getDocumentsFromTitle(@Query("title") title:String?):DocumentResponse
+    suspend fun getDocumentsFromTitle(@Query("title") title:String?,
+                                      @Query("page") page:Int=1):DocumentResponse
 
 
     @GET(SEARCH)
-    suspend fun getDocumentsFromAuthor(@Query("author") author:String?):DocumentResponse
+    suspend fun getDocumentsFromAuthor(@Query("author") author:String? ,
+                                       @Query("page") page:Int=1):DocumentResponse
 
 
 }

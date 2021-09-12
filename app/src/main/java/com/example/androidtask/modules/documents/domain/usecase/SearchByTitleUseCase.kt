@@ -10,7 +10,7 @@ import javax.inject.Inject
  */
 @DocumentsScope
 class SearchByTitleUseCase @Inject constructor(private val documentsRepo: DocumentsRepo) {
-    suspend fun execute(title: String): List<DocumentDomainModel>{
-        return documentsRepo.getDocumentsFromTitle(title)
+    suspend fun execute(title: String, page: Int): List<DocumentDomainModel>{
+        return documentsRepo.getDocumentsFromTitle(title,page)
     }
 }

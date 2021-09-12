@@ -8,6 +8,6 @@ import com.example.androidtask.modules.documents.presentation.model.DocumentPres
  */
 interface DocumentsRepo {
     suspend fun getDocumentsSearchResults(search: String, page: Int): List<DocumentDomainModel>
-    suspend fun getDocumentsFromTitle(title: String): List<DocumentDomainModel>
-    suspend fun getDocumentsFromAuthor(author: String): List<DocumentDomainModel>
+    suspend fun getDocumentsFromTitle(title: String, page: Int): List<DocumentDomainModel>
+    suspend fun getDocumentsFromAuthor(author: String, page: Int): List<DocumentDomainModel>
 }
