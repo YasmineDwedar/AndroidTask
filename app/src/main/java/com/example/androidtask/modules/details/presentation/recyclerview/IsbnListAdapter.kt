@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.androidtask.R
 import com.example.androidtask.databinding.IsbnItemBinding
-import com.example.androidtask.modules.details.di.DetailsScope
+import com.example.androidtask.commons.di.scopes.DetailsScope
 import com.example.androidtask.modules.details.presentation.model.IsbnModel
 import javax.inject.Inject
 

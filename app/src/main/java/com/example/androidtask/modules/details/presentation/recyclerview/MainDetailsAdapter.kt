@@ -8,11 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.androidtask.R
 import com.example.androidtask.databinding.ItemDetailHeaderBinding
 import com.example.androidtask.databinding.ItemIsbnListBinding
-import com.example.androidtask.modules.details.di.DetailsScope
+import com.example.androidtask.commons.di.scopes.DetailsScope
 import com.example.androidtask.modules.details.presentation.model.BaseDetailsModel
 import com.example.androidtask.modules.details.presentation.model.ISBNListModel
 import com.example.androidtask.modules.details.presentation.model.TitleAuthorModel
-import com.example.androidtask.modules.documents.presentation.model.DocumentPresentationModel
 import javax.inject.Inject
 
 /**
