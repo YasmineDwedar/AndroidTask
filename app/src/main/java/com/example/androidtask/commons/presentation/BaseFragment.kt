@@ -13,7 +13,7 @@ import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 /**
- * Created by Yasmine on September,2021
+ * Created by Yasmine on September,2021 
  */
 abstract class BaseFragment<VDB: ViewDataBinding,VM: ViewModel>(val layoutID:Int) : DaggerFragment() {
     @Inject
